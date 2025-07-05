@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VISIONFLOW – Where Elegance Meets Clarity</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --cream: #FAF7F0;
+            --warm-white: #FEFCF7;
+            --deep-forest: #1B3B36;
+            --rich-burgundy: #8B3A3A;
+            --gold-accent: #C9A96E;
+            --soft-sage: #9CAF88;
+            --warm-grey: #8B8680;
+            --charcoal: #3C3B37;
+        }
+        body {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.14rem;
+            line-height: 1.7;
+            color: var(--charcoal);
+            background: var(--warm-white);
+            overflow-x: hidden;
+        }
+        header {
+            background: var(--deep-forest);
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.1rem;
+            font-weight: 600;
+            color: var(--gold-accent);
+            letter-spacing: 2px;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        .nav-links a {
+            color: var(--cream);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            position: relative;
+            letter-spacing: 0.05em;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold-accent);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        .nav-links a:hover {
+            color: var(--gold-accent);
+        }
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 2000;
+        }
+        .nav-toggle span {
+            width: 28px;
+            height: 3px;
+            background: var(--gold-accent);
+            border-radius: 2px;
+            display: block;
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 65px;
+                right: 0;
+                background: var(--deep-forest);
+                flex-direction: column;
+                gap: 0;
+                width: 200px;
+                box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-toggle {
+                display: flex;
+            }
+        }
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--warm-white) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+        }
+        .hero-content {
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.2rem;
+            font-weight: 700;
+            color: var(--deep-forest);
+            margin-bottom: 1.3rem;
+            line-height: 1.13;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.07);
+            letter-spacing: 0.04em;
+        }
+        .hero-subtitle {
+            font-size: 1.35rem;
+            color: var(--warm-grey);
+            margin-bottom: 2.1rem;
+            font-style: italic;
+            font-family: 'Playfair Display', serif;
+        }
+        .hero-description {
+            font-size: 1.18rem;
+            color: var(--charcoal);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+            letter-spacing: 0.01em;
+        }
+        .hero-images {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .hero-images img {
+            width: 170px;
+            height: 170px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 4px 18px rgba(27,59,54,0.13);
+            border: 4px solid var(--cream);
+            background: var(--gold-accent);
+        }
+        .cta-button {
+            display: inline-block;
+            background: var(--deep-forest);
+            color: var(--cream);
+            padding: 1.08rem 2.7rem;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s cubic-bezier(.4,0,.2,1);
+            box-shadow: 0 4px 15px rgba(27, 59, 54, 0.18);
+            position: relative;
+            overflow: hidden;
+            font-size: 1.09rem;
+            letter-spacing: 0.04em;
+        }
+        .cta-button:hover {
+            transform: translateY(-4px);
+            background: var(--gold-accent);
+            color: var(--deep-forest);
+            box-shadow: 0 8px 25px rgba(27, 59, 54, 0.20);
+        }
+        /* Decorative Line */
+        .decorative-line {
+            width: 100px;
+            height: 2px;
+            background: var(--gold-accent);
+            margin: 2.1rem auto;
+            position: relative;
+        }
+        .decorative-line::before,
+        .decorative-line::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--gold-accent);
+            border-radius: 50%;
+            top: -4px;
+        }
+        .decorative-line::before { left: -15px; }
+        .decorative-line::after { right: -15px; }
+        /* Section Titles */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.14rem;
+            text-align: center;
+            margin-bottom: 1.05rem;
+            color: var(--gold-accent);
+            letter-spacing: 0.03em;
+        }
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.07rem;
+            color: var(--cream);
+            opacity: 0.93;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .classical-quote {
+            font-style: italic;
+            text-align: center;
+            color: var(--deep-forest);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+        }
+        /* Trust Section */
+        .trust-section {
+            padding: 6rem 0;
+            background: var(--deep-forest);
+            color: var(--cream);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        .trust-card {
+            background: rgba(255,255,255,0.04);
+            padding: 2.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(201, 169, 110, 0.15);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+        .trust-card:hover {
+            transform: translateY(-5px);
+        }
+        .trust-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        .trust-icon svg {
+            width: 42px;
+            height: 42px;
+            fill: var(--gold-accent);
+        }
+        /* About Section */
+        .about-section {
+            padding: 6rem 0;
+            background: var(--cream);
+        }
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .about-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.1rem;
+            color: var(--deep-forest);
+            margin-bottom: 2rem;
+            letter-spacing: 0.02em;
+        }
+        .about-text p {
+            font-size: 1.08rem;
+            line-height: 1.85;
+            margin-bottom: 1.35rem;
+            color: var(--charcoal);
+            letter-spacing: 0.01em;
+        }
+        .about-image {
+            background: linear-gradient(135deg, var(--gold-accent), var(--soft-sage));
+            height: 400px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.18rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+        }
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            opacity: 0.35;
+            position: absolute;
+            left: 0; top: 0; z-index: 0;
+        }
+        .about-image > div {
+            position: relative;
+            z-index: 1;
+        }
+        /* Services Section */
+        .services-section {
+            padding: 6rem 0;
+            background: var(--warm-white);
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.09);
+            border: 1px solid rgba(201, 169, 110, 0.13);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        .service-card img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            border: 2px solid var(--soft-sage);
+            background: var(--gold-accent);
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.14);
+        }
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--deep-forest);
+            margin-bottom: 1rem;
+        }
+        /* CTA Section (Booking) */
+        .cta-section {
+            background: var(--gold-accent);
+            color: var(--deep-forest);
+            padding: 5rem 0 4rem 0;
+            text-align: center;
+        }
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1.2rem;
+            letter-spacing: 0.03em;
+        }
+        .cta-section p {
+            font-size: 1.22rem;
+            margin-bottom: 2rem;
+            font-family: 'Crimson Text', serif;
+        }
+        .cta-section .cta-button {
+            background: var(--deep-forest);
+            color: var(--cream);
+            font-size: 1.09rem;
+        }
+        .cta-section .cta-button:hover {
+            background: var(--rich-burgundy);
+            color: var(--cream);
+        }
+        .booking-iframe {
+            width: 100%;
+            max-width: 480px;
+            margin: 2rem auto 0 auto;
+            height: 720px;
+            border: none;
+            display: block;
+            border-radius: 18px;
+            box-shadow: 0 4px 32px rgba(60,59,55,0.11);
+            background: white;
+        }
+        /* Newsletter */
+        .newsletter-section {
+            padding: 4rem 0;
+            background: var(--deep-forest);
+        }
+        .newsletter-box {
+            max-width: 480px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+            color: var(--cream);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .newsletter-title {
+            font-size: 1.29rem;
+            font-family: 'Playfair Display', serif;
+            color: var(--gold-accent);
+            margin-bottom: 1rem;
+        }
+        .newsletter-box input[type="email"] {
+            padding: 0.8rem 1.2rem;
+            border-radius: 30px;
+            border: 1px solid var(--gold-accent);
+            margin-right: 0.5rem;
+            font-size: 1rem;
+            width: 60%;
+            max-width: 250px;
+        }
+        .newsletter-box button {
+            padding: 0.8rem 1.4rem;
+            border-radius: 30px;
+            border: none;
+            background: var(--gold-accent);
+            color: var(--deep-forest);
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+        .newsletter-box button:hover {
+            background: var(--soft-sage);
+        }
+        /* Blog Section */
+        .blog-section {
+            padding: 6rem 0 3rem 0;
+            background: var(--cream);
+        }
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .blog-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            overflow: hidden;
+            transition: box-shadow 0.3s;
+            text-align: left;
+            border: 1px solid rgba(201, 169, 110, 0.14);
+        }
+        .blog-card:hover {
+            box-shadow: 0 10px 24px rgba(0,0,0,0.13);
+        }
+        .blog-card img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+        }
+        .blog-card-content {
+            padding: 1.55rem;
+        }
+        .blog-card-title {
+            font-size: 1.18rem;
+            color: var(--deep-forest);
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 0.5rem;
+        }
+        .blog-card-meta {
+            font-size: 0.96rem;
+            color: var(--warm-grey);
+            margin-bottom: 1rem;
+        }
+        .blog-card-desc {
+            color: var(--charcoal);
+            font-size: 1rem;
+        }
+        /* Contact Section */
+        .contact-section {
+            padding: 6rem 0;
+            background: var(--deep-forest);
+            color: var(--cream);
+        }
+        .contact-form {
+            max-width: 600px;
+            margin: 3rem auto 0;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--gold-accent);
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(201, 169, 110, 0.3);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+            color: var(--cream);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold-accent);
+        }
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(250, 247, 240, 0.6);
+        }
+        .submit-btn {
+            background: var(--gold-accent);
+            color: var(--deep-forest);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 2rem auto 0;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(201, 169, 110, 0.4);
+            background: var(--soft-sage);
+        }
+        /* Footer */
+        footer {
+            background: var(--charcoal);
+            color: var(--cream);
+            padding: 3rem 0 1rem;
+            text-align: center;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--gold-accent);
+            margin-bottom: 1rem;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .footer-links a {
+            color: var(--cream);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover {
+            color: var(--gold-accent);
+        }
+        @media (max-width: 900px) {
+            .about-content { grid-template-columns: 1fr; }
+            .services-grid, .blog-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2.2rem; }
+            .about-image { height: 200px; font-size: 1rem; }
+            .newsletter-title { font-size: 1.03rem; }
+            .cta-section h2 { font-size: 1.14rem; }
+            .booking-iframe { height: 580px; }
+            .hero-images { flex-direction: column; gap: 1rem; }
+            .hero-images img { width: 90vw; height: 120px; }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav>
+        <div class="logo">VISIONFLOW</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#booking">Book a Call</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="nav-toggle" aria-label="Open menu" onclick="toggleNav()">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+</header>
+
+<section id="home" class="hero">
+    <div class="hero-content fade-in-up">
+        <h1>VISIONFLOW</h1>
+        <p class="hero-subtitle">For Those Who Value Purpose and Poise</p>
+        <div class="decorative-line"></div>
+        <div class="hero-images">
+            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=300&q=80" alt="Elegant workspace">
+            <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=300&q=80" alt="Classical architecture">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=300&q=80" alt="Nature and progress">
+        </div>
+        <p class="hero-description">
+            There is a quiet courage in clarity and a timeless beauty in restraint.<br>
+            With VISIONFLOW, embark upon a journey where your ambitions are cultivated through thoughtful structure and sophisticated design.
+        </p>
+        <div class="classical-quote">
+            “Elegance is not about being noticed, it is about being remembered.”
+        </div>
+        <a href="#booking" class="cta-button">Book a Personal Call</a>
+    </div>
+</section>
+
+<section class="trust-section">
+    <div class="container">
+        <h2 class="section-title">A Tradition of Discretion and Distinction</h2>
+        <p class="section-subtitle">
+            In an era of haste and noise, we preserve spaces for reflection and purposeful advancement.<br>
+            Our counsel is rooted in time-honoured principles, enriched with the wisdom of experience.
+        </p>
+        <div class="decorative-line"></div>
+        <div class="trust-grid">
+            <div class="trust-card">
+                <div class="trust-icon">
+                    <svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" stroke-width="2" fill="none" stroke="currentColor"/><circle cx="16" cy="16" r="7" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="16" r="2.5" fill="currentColor"/></svg>
+                </div>
+                <h3>Exactitude & Lucidity</h3>
+                <p>Our commitment to fair exchange is unwavering, our mastery in artificial intelligence a promise for the future.</p>
+            </div>
+            <div class="trust-card">
+                <div class="trust-icon">
+                    <svg viewBox="0 0 32 32"><path d="M6 18 l8 8 l12-8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6 18 l8-8 l12 8" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                </div>
+                <h3>Partnership</h3>
+                <p>Guided by both creative intuition and technical acumen, we walk alongside you with integrity and purpose.</p>
+            </div>
+            <div class="trust-card">
+                <div class="trust-icon">
+                    <svg viewBox="0 0 32 32"><rect x="4" y="4" width="24" height="24" rx="6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 10 h12 v12 h-12z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                </div>
+                <h3>Efficient Structure</h3>
+                <p>Our methods instil order, clarity, and enduring value – discreet, yet profound in their effect.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="about" class="about-section">
+    <div class="container">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Our Ethos</h2>
+                <p>
+                    We are united by a singular aim: to create frameworks which enable individuals and organisations to meet their days with calm resolve and refined presence.
+                </p>
+                <p>
+                    At the intersection of venerable tradition and modern science, we offer not mere solutions, but cultivated experiences that elevate the human spirit.
+                </p>
+                <p>
+                    Through careful listening and bespoke strategy, we become stewards of your aspirations, ensuring that achievement is both graceful and lasting.
+                </p>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Tradition and innovation">
+                <div>
+                    <strong>Where Tradition Embraces Tomorrow</strong><br>
+                    <em>For years, discerning clients have entrusted us with their most consequential ventures.</em>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="services" class="services-section">
+    <div class="container">
+        <h2 class="section-title" style="color: var(--deep-forest);">Our Services</h2>
+        <p class="section-subtitle" style="color: var(--charcoal);">
+            Crafted with care for those who seek more than the ordinary
+        </p>
+        <div class="decorative-line"></div>
+        <div class="services-grid">
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=200&q=80" alt="AI Advisory">
+                <h3>AI Advisory & Strategy</h3>
+                <p>
+                    We devise strategies for artificial intelligence that harmonise with your corporate philosophy, from conceptual genesis to seamless integration.
+                </p>
+            </div>
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=200&q=80" alt="Digital Renaissance">
+                <h3>Digital Renaissance</h3>
+                <p>
+                    Let us guide your transformation. We blend time-tested methods with contemporary technology, fostering efficiency and resilience for the future.
+                </p>
+            </div>
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=200&q=80" alt="System Refinement">
+                <h3>System Refinement</h3>
+                <p>
+                    We evaluate and elevate your existing systems, enhancing both productivity and delight for all who engage with your enterprise.
+                </p>
+            </div>
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1454023492550-5696f8ff10e1?auto=format&fit=crop&w=200&q=80" alt="Continual Counsel">
+                <h3>Continual Counsel</h3>
+                <p>
+                    Our engagement is not fleeting; we offer enduring partnership, attentive support, and bespoke instruction for your ongoing distinction.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="booking" class="cta-section">
+    <h2>Arrange a Personal Conversation</h2>
+    <p>
+        In keeping with the finest traditions of personal counsel, we invite you to a brief, no-obligation call.<br>
+        Discretion and clarity await.
+    </p>
+    <iframe src="https://calendly.com/max-gonther/quick-call?hide_event_type_details=1&hide_gdpr_banner=1" class="booking-iframe" title="Book a call with VISIONFLOW" allowtransparency="true"></iframe>
+</section>
+
+<section class="newsletter-section">
+    <div class="newsletter-box">
+        <div class="newsletter-title">Receive Our Occasional Dispatches</div>
+        <form id="newsletter-form">
+            <input type="email" id="newsletter-email" placeholder="Your email address" required />
+            <button type="submit">Subscribe</button>
+        </form>
+        <div id="newsletter-success" style="display:none;margin-top:1rem;color:var(--soft-sage);font-weight:600;">Thank you for subscribing. We are honoured by your interest.</div>
+    </div>
+</section>
+
+<section id="blog" class="blog-section">
+    <div class="container">
+        <h2 class="section-title" style="color: var(--deep-forest);">Reflections</h2>
+        <p class="section-subtitle" style="color: var(--charcoal);">
+            Essays and insights from the atelier of VISIONFLOW
+        </p>
+        <div class="decorative-line"></div>
+        <div class="blog-grid">
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80" alt="AI in business" />
+                <div class="blog-card-content">
+                    <div class="blog-card-title">On the Quiet Power of Artificial Intelligence</div>
+                    <div class="blog-card-meta">July 2025 · 5 min read</div>
+                    <div class="blog-card-desc">How AI, carefully employed, may elevate the dignified work of organisations.</div>
+                </div>
+            </div>
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80" alt="Teamwork" />
+                <div class="blog-card-content">
+                    <div class="blog-card-title">The Art of Building Enduring Teams</div>
+                    <div class="blog-card-meta">June 2025 · 4 min read</div>
+                    <div class="blog-card-desc">On the cultivation of teams whose unity is founded upon trust and shared intent.</div>
+                </div>
+            </div>
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Workflow" />
+                <div class="blog-card-content">
+                    <div class="blog-card-title">Refining the Everyday: On the Value of Structure</div>
+                    <div class="blog-card-meta">May 2025 · 3 min read</div>
+                    <div class="blog-card-desc">A meditation on the elegance of efficient systems, and how they may serve the greater good.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="contact-section">
+    <div class="container">
+        <h2 class="section-title">Correspondence</h2>
+        <p class="section-subtitle">
+            Should you wish to begin a conversation, we welcome your enquiry.<br>
+            It is our privilege to listen.
+        </p>
+        <div class="decorative-line"></div>
+        <form class="contact-form">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your full name">
+            </div>
+            <div class="form-group">
+                <label for="email">E-Mail</label>
+                <input type="email" id="email" name="email" placeholder="your@email.com">
+            </div>
+            <div class="form-group">
+                <label for="company">Company</label>
+                <input type="text" id="company" name="company" placeholder="Your company (optional)">
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" placeholder="How may we be of service?"></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+        <div style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(201, 169, 110, 0.3);">
+            <p style="margin-bottom: 1rem; color: var(--gold-accent);">Direct Contact</p>
+            <p>
+                <strong>E-Mail:</strong>
+                <a href="mailto:visionflow@gmx.net" style="color: var(--cream); text-decoration: underline;">visionflow@gmx.net</a>
+            </p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-logo">VISIONFLOW</div>
+        <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#blog">Blog</a>
+            <a href="#booking">Book a Call</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <p>&copy; 2025 VISIONFLOW. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('active');
+}
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            e.preventDefault();
+            target.scrollIntoView({behavior: 'smooth', block: 'start'});
+            document.getElementById('navLinks').classList.remove('active');
+        }
+    });
+});
+// Contact form - mailto
+document.querySelector('.contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    const name = formData.get('name');
+    const email = formData.get('email');
+    const company = formData.get('company');
+    const message = formData.get('message');
+    const subject = encodeURIComponent(`Enquiry from ${name}${company ? ` (${company})` : ''}`);
+    const body = encodeURIComponent(`Name: ${name}\nE-Mail: ${email}\n${company ? `Company: ${company}\n` : ''}\nMessage:\n${message}`);
+    const mailtoLink = `mailto:visionflow@gmx.net?subject=${subject}&body=${body}`;
+    window.location.href = mailtoLink;
+    alert('Thank you for your message. Your email program will open shortly.');
+    this.reset();
+});
+// Newsletter form
+document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    document.getElementById('newsletter-success').style.display = 'block';
+    this.reset();
+});
+</script>
+</body>
+</html>
